@@ -191,12 +191,14 @@ if __name__ == "__main__":
 
     webarxivid = bbcids_dict[bbcid]
     downloaded_file = download_dir+"/"+get_download_file_name(webarxivid)
-    
+    renamed_downloaded_file = download_dir + "/" + bbcid + ".html"
+
     if not os.path.isfile(downloaded_file):
       failed_id_file.write(bbcid+"\tHTML FILE IS NOT YET DOWNLOADED.\n")
       continue
 
     htmldata = open(downloaded_file, 'rb').read()
+    os.rename(downloaded_file, renamed_downloaded_file)
     
     # url, corpus, htmldatax
     story_title, story_introduction, story_restcontent = GenerateMapper((webarxivid, "bbc", htmldata))
